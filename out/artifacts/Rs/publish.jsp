@@ -1,0 +1,91 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/info-reg.css" />
+    <title>网上招聘系统</title>
+</head>
+
+<body>
+<div class="title"><h2>个人基本信息</h2></div>
+<div class="main">
+    <form id="frm">
+        <p class="short-input ue-clear newstyle">
+            <label>姓名：</label><input name="name" type="text" readonly="readonly" style="border:0;background:transparent;"  value="${user.realName }"/>
+        </p>
+        <p class="long-input ue-clear newstyle">
+            <label>性别：</label><input name="sex" type="text" readonly="readonly" style="border:0;background:transparent;" value="${user.sex}">
+        </p>
+        <p class="short-input ue-clear newstyle">
+            <label>生日：</label><input name="birthday" type="text" readonly="readonly" style="border:0;background:transparent;" value="${user.birth}">
+        </p>
+        <p class="short-input ue-clear newstyle">
+            <label>毕业学校：</label><input name="school" type="text" readonly="readonly" style="border:0;background:transparent;" value="${user.school}">
+        </p>
+        <p class="short-input ue-clear newstyle">
+            <label>专业类别：</label><input name="trade" type="text" readonly="readonly" style="border:0;background:transparent;" value="${user.major }">
+        </p>
+        <p class="long-input ue-clear newstyle">
+            <label>移动电话：</label><input name="phone" type="text" readonly="readonly" style="border:0;background:transparent;" value="${user.phone}">
+        </p>
+        <p class="short-input ue-clear newstyle">
+            <label>电子邮箱：</label><input name="email" type="text" readonly="readonly" style="border:0;background:transparent;" value="${user.email }">
+        </p>
+        <p class="short-input ue-clear newstyle">
+            <label>薪资期望：</label><input name="salary" type="text" readonly="readonly" style="border:0;background:transparent;" value="${user.salary }">
+        </p>
+        <p class="short-input ue-clear newstyle">
+            <label>期望岗位：</label><input name="position" type="text" readonly="readonly" style="border:0;background:transparent;" value="${user.desiredPosition }">
+        </p>
+        <p class="short-input ue-clear newstyle">
+            <label>个人评价：</label><input name="tip" type="text" readonly="readonly" style="border:0;background:transparent;" value="${user.tip }">
+        </p>
+        <div class="btn" style="display: inline; border: none">
+            <input style="height:50px;width:150px;background-color:#68B86C;color:white;border-radius:5px" type="button" value="发布" onclick="publish()"/>
+        </div>
+        <div class="btn" style="display: inline;border: none">
+            <input style="height:50px;width:150px;background-color:#68B86C;color:white;border-radius:5px" type="button" value="修改" onclick="goUpd()"/>
+        </div>
+    </form>
+</div>
+
+</body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/WdatePicker.js"></script>
+<script type="text/javascript">
+    showRemind('input[type=text], textarea','placeholder');
+
+    function publish() {
+        var $res = confirm("确定要发布简历吗？");
+        if($res) {
+           submitData();
+        }
+    }
+
+    function goUpd() {
+        window.location.href="update.jsp";
+    }
+
+    function submitData() {
+        $.ajax({
+            url:"publish",
+            type:"get",
+            dataType:"text",
+            data:$("#frm").serialize(),
+            success:function(data){
+                console.info(data);
+                if(data=='成功') {
+                    alert("发布成功！");
+                }
+            },
+            error:function() {
+                alert("发布失败");
+            }
+        });
+    }
+</script>
+</html>

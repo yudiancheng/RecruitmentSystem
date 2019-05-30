@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yu.mapper.ResumeMapper">
+    <!--查询简历-->
+    <select id="selResume" parameterType="map" resultType="person">
+        select * from person where id = any(select pid from resume)
+        <if test="major != null and major != ''">
+            and major=#{major}
+        </if>
+        <if test="salary != null and salary != ''">
+            and salary=#{salary}
+        </if>
+        <if test="school != null and school != ''">
+            and school=#{school}
+        </if>
+        limit #{pageNumber},#{pageSize}
+    </select>
+    <!--查询总条数-->
+    <select id="selResumeCount" parameterType="map" resultType="int">
+        select count(*) from person where id = any(select pid from resume)
+        <if test="major != null and major != ''">
+            and major=#{major}
+        </if>
+        <if test="salary != null and salary != ''">
+            and salary=#{salary}
+        </if>
+        <if test="school != null and school != ''">
+            and school=#{school}
+        </if>
+    </select>
+</mapper>

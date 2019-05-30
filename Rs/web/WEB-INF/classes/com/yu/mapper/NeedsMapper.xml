@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yu.mapper.NeedsMapper">
+    <resultMap id="myNeedsMap" type="needs">
+        <id column="id" property="id"/>
+        <result column="cid" property="cid"/>
+        <result column="needs" property="needs"/>
+        <result column="salary" property="salary"/>
+    </resultMap>
+    <select id="selNeedsByCid" parameterType="int" resultMap="myNeedsMap">
+        select * from company_needs where cid = #{0}
+    </select>
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yu.mapper.CompanyMapper">
+    <resultMap id="myCompanyMap" type="company">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="realName" property="realName"/>
+        <result column="location" property="location"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="tip" property="tip"/>
+        <collection property="needs" select="com.yu.mapper.NeedsMapper.selNeedsByCid" column="id"></collection>
+    </resultMap>
+
+    <!--查询所有公司需求信息分页-->
+    <select id="selAllComNeeds" resultMap="myCompanyMap" parameterType="map">
+        select * from company limit #{pageNumber},#{pageSize}
+    </select>
+    <!--查询所有公司需求信息不分页-->
+    <select id="selAllComNeedsNoPage" resultMap="myCompanyMap">
+        select * from company
+    </select>
+
+    <!--n+1 方式id查询-->
+    <select id="selCompanyById" parameterType="int" resultMap="myCompanyMap">
+        select * from company where id=#{0}
+    </select>
+    <!--非n+1 方式id查询-->
+    <select id="selComInfoById" parameterType="int" resultType="company">
+         select * from company where id=#{0}
+    </select>
+    <!--查询总条数-->
+    <select id="selCount" resultType="int">
+        select count(*) from company
+    </select>
+    <!--更新公司信息-->
+    <update id="updateComInfo" parameterType="company">
+        update company
+        <set>
+            id=#{id},
+            <if test="username != null and username != ''">
+                username=#{username},
+            </if>
+            <if test="password != null and password != ''">
+                password=#{password},
+            </if>
+            <if test="realName != null and realName != ''">
+                realName=#{realName},
+            </if>
+            <if test="location != null and location != ''">
+                location=#{location},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone=#{phone},
+            </if>
+            <if test="email != null and email != ''">
+                email=#{email},
+            </if>
+            <if test="tip != null and tip != ''">
+                tip=#{tip},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+</mapper>

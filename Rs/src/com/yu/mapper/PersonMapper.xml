@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yu.mapper.PersonMapper">
+    <update id="updateInfo" parameterType="person">
+        update person
+        <set>
+            <if test="username != null">
+                username=#{username},
+            </if>
+            <if test="password != null">
+                password=#{password},
+            </if>
+            <if test="realName != null">
+                realName=#{realName},
+            </if>
+            <if test="sex != null">
+                sex=#{sex},
+            </if>
+            <if test="birth != null">
+                birth=#{birth},
+            </if>
+            <if test="school != null">
+                school=#{school},
+            </if>
+            <if test="phone != null">
+                phone=#{phone},
+            </if>
+            <if test="email != null">
+                email=#{email},
+            </if>
+            <if test="major != null">
+                major=#{major},
+            </if>
+            <if test="salary != null">
+                salary=#{salary},
+            </if>
+            <if test="tip != null">
+                tip=#{tip}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+</mapper>
