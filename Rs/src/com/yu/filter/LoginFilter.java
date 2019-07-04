@@ -18,18 +18,16 @@ public class LoginFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse)response;
         String uri = req.getRequestURI();
         System.out.println(uri);
-        if(uri.equals("/Rs/personLogin") || uri.equals("/Rs/login.jsp")) {
+        if(uri.equals("/Rs/login.jsp")) {
             filterChain.doFilter(request,response);
-            return;
-        } else {
+        }
+         else {
             Object user = req.getSession().getAttribute("user");
             Object company = req.getSession().getAttribute("company");
             if(user != null || company != null) {
                 filterChain.doFilter(request,response);
-                return;
             } else {
                 resp.sendRedirect("/Rs/login.jsp");
-                return;
             }
         }
     }

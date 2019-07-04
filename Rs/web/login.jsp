@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -64,7 +64,7 @@
 					<input type="submit" style="width:117px;height:40px;border-radius:10px;background-color:#2E84CD;color:white" value="登录">
 					<input type="checkbox" name="rem" id="remember"/>
 					<label for="remember" style="font-size:15px">三天免登陆</label>
-					<a style="font-size:15px;position:relative;left:100px"  href="javascript:void(0)" onclick="register()">
+					<a style="font-size:15px;position:relative;left:100px"  href="javascript:register();">
 						<label>点击注册</label></a>
 				</div>
 
